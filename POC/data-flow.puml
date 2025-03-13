@@ -1,0 +1,72 @@
+@startuml Kimai Invoice XLSX Export Data Flow
+
+skinparam handwritten false
+skinparam monochrome false
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam roundCorner 8
+skinparam dpi 100
+skinparam packageBackgroundColor #EEEEEE
+skinparam packageBorderColor #555555
+skinparam componentBackgroundColor #C8E6C9
+skinparam componentBorderColor #43A047
+skinparam interfaceBackgroundColor #BBDEFB
+skinparam interfaceBorderColor #1E88E5
+skinparam arrowColor #424242
+
+title Luồng Dữ Liệu Xuất Hóa Đơn XLSX trong Kimai
+
+package "Models" {
+  [Customer] as customer
+  [Template] as template
+  [TimeEntry] as timeEntry
+  [Calculator] as calculator
+  [NumberGenerator] as numberGenerator
+  [InvoiceModel] as invoiceModel
+}
+
+package "Renderer" {
+  [XlsxRenderer] as xlsxRenderer
+}
+
+package "Web Server" {
+  [Express App] as expressApp
+  [Invoice Route] as invoiceRoute
+}
+
+database "Timesheet Data" as timesheetData
+database "Customer Data" as customerData
+database "Company Data" as companyData
+
+timesheetData --> timeEntry : Cung cấp dữ liệu timesheet
+customerData --> customer : Cung cấp thông tin khách hàng
+companyData --> template : Cung cấp thông tin công ty
+
+timeEntry --> calculator : Dùng để tính toán
+calculator --> invoiceModel : Cung cấp kết quả tính toán
+customer --> invoiceModel : Cung cấp thông tin khách hàng
+template --> invoiceModel : Cung cấp thông tin công ty
+numberGenerator --> invoiceModel : Cung cấp số hóa đơn
+
+invoiceModel --> xlsxRenderer : Cung cấp dữ liệu để render
+xlsxRenderer --> invoiceRoute : Trả về file XLSX
+invoiceRoute --> expressApp : Đăng ký route
+expressApp --> [Web Browser] : Phục vụ file XLSX
+
+note right of xlsxRenderer
+  Chuyển đổi dữ liệu từ InvoiceModel
+  thành file XLSX với định dạng chuyên nghiệp
+end note
+
+note right of calculator
+  Tính toán subtotal, thuế và tổng cộng
+  dựa trên dữ liệu timesheet
+end note
+
+note right of invoiceModel
+  Tổng hợp tất cả thông tin cần thiết
+  để tạo hóa đơn hoàn chỉnh
+end note
+
+@enduml

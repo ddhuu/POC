@@ -1,0 +1,15 @@
+{
+  "name": "kimai-invoice-xlsx-poc",
+  "version": "1.0.0",
+  "description": "Proof of Concept for Kimai XLSX Invoice Export",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "exceljs": "^4.3.0",
+    "express": "^4.18.2",
+    "moment": "^2.29.4"
+  }
+}
