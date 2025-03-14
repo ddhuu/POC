@@ -81,3 +81,18 @@ Proof of concept này chứng minh rằng việc phát triển tính năng tạo
 5. Tích hợp với hệ thống thông báo
 
 Khi tích hợp vào dự án Kimai thực tế, chúng ta có thể sử dụng kiến trúc microservice tương tự và điều chỉnh để phù hợp với kiến trúc của Kimai.
+
+## Kết quả thực thi
+Kết quả thực thi của POC được lưu trữ trong thư mục `docs`:
+
+### Giao diện người dùng
+![Giao diện người dùng](docs/UI.png)
+
+### Kết quả xuất hóa đơn XLSX
+![Kết quả xuất hóa đơn](docs/RESULT.png)
+
+### Tài liệu bổ sung
+- `docs/EXPLANATION.md`: Giải thích chi tiết về cách thức hoạt động của POC.
+- `docs/PRICING.md`: Thông tin về cách tính giá và các mô hình định giá.
+
+Các tài liệu và hình ảnh này minh họa khả năng tạo và xuất hóa đơn XLSX theo yêu cầu của dự án.
